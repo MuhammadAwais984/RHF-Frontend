@@ -1,0 +1,2 @@
+http://localhost:1337/api/recipes?filters[recipe_category][slug][$eq]=recipe-category&populate=*
+http://localhost:1337/api/recipes?filters[recipe_category][slug][$eq]=recipe-category&populate[coverImages]=true&populate[recipe_category]=true&populate[nutrition]=true&populate[ingredients][on][recipe.ingredients][populate][IngredientImages]=true&populate[steps][on][recipe.steps][populate][StepsImages]=true

@@ -1,7 +1,34 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const isProd = process.env.NODE_ENV === "production";
+
+const nextConfig = {
+  images: {
+    dangerouslyAllowLocalIP: !isProd,
+    remotePatterns: isProd
+      ? [
+          {
+            protocol: "https",
+            hostname: "admin.rhfpakistan.com",
+            port: "",
+            pathname: "/uploads/**",
+          },
+        ]
+      : [
+          {
+            protocol: "http",
+            hostname: "localhost",
+            port: "1337",
+            pathname: "/uploads/**",
+          },
+          {
+            protocol: "http",
+            hostname: "192.168.1.6",
+            port: "1337",
+            pathname: "/uploads/**",
+          },
+        ],
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
