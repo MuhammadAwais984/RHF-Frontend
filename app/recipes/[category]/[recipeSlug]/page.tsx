@@ -668,10 +668,9 @@ export default async function RecipeDetailsPage({
 
               {/* Content: Clean spacing and serif-style quote feel */}
               <div className="relative">
-                <p className="text-lg text-stone-600 leading-relaxed tracking-tight">
-                  "{recipe.chefsNote}"
-                </p>
-
+                <div className="text-lg  leading-relaxed tracking-tight">
+                  <MarkdownRenderer content={recipe.chefsNote} />
+                </div>
                 {/* Subtle Signature/Decorative Line */}
                 <div className="mt-6 flex items-center gap-3">
                   <div className="h-[1px] w-12 bg-stone-200" />
