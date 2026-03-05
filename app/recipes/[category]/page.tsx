@@ -10,7 +10,6 @@ interface RecipeCard {
   slug: string;
   prepTime: number;
   totalTime: number;
-  avgRating: number;
   viewsCount: number;
   favoritesCount: number;
   images: { url: string; altText: string }[];
