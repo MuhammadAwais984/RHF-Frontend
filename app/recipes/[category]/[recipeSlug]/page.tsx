@@ -72,7 +72,7 @@ async function getRecipe(slug: string) {
 &populate[ingredients][populate]=*
 &populate[steps][populate]=*
 &populate[questionAnswer][populate]=*`,
-    { next: { revalidate: 3600 } },
+    { next: { revalidate: 100 } },
   );
   if (!res.ok) throw new Error("Failed to load recipe");
 
