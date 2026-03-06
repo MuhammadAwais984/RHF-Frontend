@@ -28,6 +28,36 @@ body {
     scrollbar-width: none;
   }
 }
+
+/* This targets the HTML output specifically inside your renderer */
+
+.prose h2 {
+  font-size: 1.875rem !important; /* text-3xl */
+}
+/* Continue targeting the HTML output inside your renderer */
+
+.prose h3 {
+  font-size: 1.5rem !important; /* text-2xl */
+}
+
+.prose h4 {
+  font-size: 1.25rem !important; /* text-xl */
+}
+
+.prose h5 {
+  font-size: 1.125rem !important; /* text-lg */
+}
+
+.prose h6 {
+  font-size: 1rem !important; /* text-base */
+}
+
+/* Optional: Smooth out spacing between consecutive headings */
+.prose h2 + h3,
+.prose h3 + h4,
+.prose h4 + h5 {
+  margin-top: 0.5rem !important;
+}
 /* // app/
 // └── recipes/
 //     ├── page.tsx                  // all categories

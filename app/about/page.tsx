@@ -38,7 +38,7 @@ export default function About() {
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.5 }}
           transition={{ duration: 1.5 }}
-          className="absolute inset-0 bg-gradient-to-r from-red-900 to-stone-900 bg-cover bg-center"
+          className="absolute inset-0 bg-linear-to-br from-stone-900 via-red-600 to-stone-900 bg-cover bg-center"
         />
         <motion.div
           initial="hidden"

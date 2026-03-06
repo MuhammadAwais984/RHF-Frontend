@@ -89,11 +89,11 @@ export default async function RecipeCategories() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <header className="max-w-7xl mx-auto px-6 pt-16 pb-12">
-        <span className="text-orange-600 font-semibold tracking-widest uppercase text-xs">
+        <span className="text-red-700 font-semibold tracking-widest uppercase text-xs">
           Delicious Discovery
         </span>
 
-        <h1 className="mt-3 text-4xl md:text-5xl font-black text-slate-900">
+        <h1 className="mt-3 text-4xl md:text-5xl  text-slate-900">
           Browse by Category
         </h1>
 
@@ -108,7 +108,7 @@ export default async function RecipeCategories() {
             <Link
               key={cat.id}
               href={`/recipes/${cat.slug}`}
-              className="group relative block aspect-square overflow-hidden rounded-2xl"
+              className="group relative block aspect-square overflow-hidden rounded-4xl shadow-2xl"
             >
               {cat.imageUrl ? (
                 <Image

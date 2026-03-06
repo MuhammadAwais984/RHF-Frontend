@@ -137,7 +137,8 @@ export default async function CategoryRecipes({
           __html: JSON.stringify(RecipeStructuredData(recipes, category)),
         }}
       />
-      <header className="relative py-20 bg-linear-to-r from-red-700 to-black overflow-hidden">
+      <header className="relative py-24 px-6 bg-gradient-to-br from-stone-900 via-red-800 to-stone-900 overflow-hidden shadow-2xl">
+        {" "}
         <div className="absolute inset-0 opacity-20">
           {/* Subtle texture or pattern here */}
         </div>
@@ -168,7 +169,7 @@ export default async function CategoryRecipes({
 
             return (
               <article key={recipe.id} className="group flex flex-col">
-                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-100 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1">
+                <div className="relative aspect-[4/3] rounded-4xl overflow-hidden bg-slate-100 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1">
                   <Link href={`/recipes/${category}/${recipe.slug}`}>
                     {headImage?.url ? (
                       <Image

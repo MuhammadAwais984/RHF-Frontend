@@ -53,7 +53,7 @@ export default function Navbar() {
         open || scrolled ? "bg-white shadow-md py-3" : "bg-white py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="mx-auto px-6 flex items-center justify-between">
         {/* LOGO AREA */}
         <Link
           href="/"
@@ -90,7 +90,10 @@ export default function Navbar() {
                     : "text-stone-500 hover:text-stone-900"
                 }`}
               >
-                {link.name}
+                <div className="flex items-center">
+                  <div className="mr-1">{link.icon}</div>
+                  <div> {link.name}</div>
+                </div>
                 <span
                   className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-red-600 transition-all duration-300 ${isActive ? "w-6" : "w-0 group-hover:w-6"}`}
                 />

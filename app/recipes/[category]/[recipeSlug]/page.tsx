@@ -72,7 +72,7 @@ async function getRecipe(slug: string) {
 &populate[ingredients][populate]=*
 &populate[steps][populate]=*
 &populate[questionAnswer][populate]=*`,
-    { next: { revalidate: 100 } },
+    { cache: "no-store" },
   );
   if (!res.ok) throw new Error("Failed to load recipe");
 
@@ -405,8 +405,8 @@ export default async function RecipeDetailsPage({
             {/* MAIN STORY / DESCRIPTION */}
             <div className="relative">
               <div
-                className="prose prose-stone prose-lg max-w-none 
-          text-stone-600 leading-relaxed text-lg md:text-xl
+                className=" 
+          text-stone-600 leading-relaxed  md:text-lg
           text-justify hyphens-auto
           first-letter:text-7xl first-letter:font-bold 
           first-letter:text-stone-900 first-letter:mr-3 first-letter:float-left
@@ -501,7 +501,7 @@ export default async function RecipeDetailsPage({
                       className="group flex items-center gap-4 py-4 px-2 transition-all duration-300"
                     >
                       {/* CHECKBOX CUSTOM COMPONENT */}
-                      <div className="relative flex items-center justify-center shrink-0">
+                      {/* <div className="relative flex items-center justify-center shrink-0">
                         <input
                           type="checkbox"
                           className="peer h-6 w-6 cursor-pointer appearance-none rounded-lg border-2 border-stone-200 transition-all checked:bg-stone-900 checked:border-stone-900 hover:border-orange-400"
@@ -519,11 +519,11 @@ export default async function RecipeDetailsPage({
                             d="M5 13l4 4L19 7"
                           />
                         </svg>
-                      </div>
+                      </div> */}
 
                       {/* INGREDIENT IMAGE */}
                       {/* Change the Ingredient Image section to this: */}
-                      <div className="relative w-12 h-12 flex-shrink-0 rounded-xl overflow-hidden ring-2 ring-stone-50 group-hover:ring-orange-100 transition-all">
+                      <div className="relative w-15 h-15 flex-shrink-0 rounded-xl overflow-hidden ring-2 ring-stone-50 group-hover:ring-orange-100 transition-all">
                         {ing.imageUrl ? (
                           <Image
                             src={ing.imageUrl}
@@ -561,8 +561,6 @@ export default async function RecipeDetailsPage({
               </ul>
             </div>
           </div>
-
-          {/* SECONDARY PRO-TIP CARD */}
         </div>
       </section>
       <section className="w-full max-w-4xl mx-auto px-6 py-12">
@@ -585,7 +583,7 @@ export default async function RecipeDetailsPage({
               >
                 {/* STEP NUMBER */}
                 <div className="relative z-10">
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-red-700 flex flex-col items-center justify-center shadow-lg transition-transform group-hover:rotate-3">
+                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-red-700 via-red-800 to-indigo-900 flex flex-col items-center justify-center shadow-lg transition-transform group-hover:rotate-3">
                     <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-red-100 font-bold leading-none mb-1">
                       Step
                     </span>
