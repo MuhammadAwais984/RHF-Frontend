@@ -405,8 +405,7 @@ export default async function RecipeDetailsPage({
             {/* MAIN STORY / DESCRIPTION */}
             <div className="relative">
               <div
-                className=" 
-          text-stone-600 leading-relaxed  md:text-lg
+                className=" text-stone-600 leading-relaxed  md:text-lg
           text-justify hyphens-auto
           first-letter:text-7xl first-letter:font-bold 
           first-letter:text-stone-900 first-letter:mr-3 first-letter:float-left

@@ -152,7 +152,7 @@ export default async function CategoryRecipes({
               {recipes[0]?.categoryName || category}
             </span>{" "}
           </nav>
-          <h1 className="text-5xl md:text-6xl font-black text-white capitalize tracking-tight">
+          <h1 className="text-5xl md:text-6xl text-white capitalize tracking-tight">
             {recipes[0]?.categoryName || category} Collection
           </h1>
           <p className="mt-6 text-slate-300 max-w-xl mx-auto text-lg font-light leading-relaxed">
@@ -168,26 +168,32 @@ export default async function CategoryRecipes({
             const headImage = recipe.images[0];
 
             return (
-              <article key={recipe.id} className="group flex flex-col">
-                <div className="relative aspect-[4/3] rounded-4xl overflow-hidden bg-slate-100 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1">
+              <article
+                key={recipe.id}
+                className="group flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300"
+              >
+                {/* Image Container */}
+                <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                   <Link href={`/recipes/${category}/${recipe.slug}`}>
                     {headImage?.url ? (
                       <Image
                         src={headImage.url}
                         alt={headImage.altText || recipe.title}
                         fill
-                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     ) : (
-                      <div className="w-full h-full bg-slate-200 flex items-center justify-center text-gray-400">
-                        No Image
+                      <div className="w-full h-full flex items-center justify-center text-slate-300">
+                        <span className="text-xs uppercase tracking-widest">
+                          No Image
+                        </span>
                       </div>
                     )}
                   </Link>
 
-                  {/* Favorite button */}
-                  <div className="absolute top-4 right-4 flex justify-between items-start">
+                  {/* Favorite Button - Floating */}
+                  <div className="absolute top-3 right-3 z-10">
                     <FavoriteButton
                       recipeId={recipe.id}
                       initialCount={recipe.favoritesCount}
@@ -195,35 +201,44 @@ export default async function CategoryRecipes({
                   </div>
                 </div>
 
-                {/* Text content */}
-                <div className="mt-6 px-2">
-                  <div className="flex items-center justify-between mb-3"></div>
-
-                  <Link href={`/recipes/${recipe.categorySlug}/${recipe.slug}`}>
-                    {" "}
-                    <div className="flex justify-between ">
-                      <h2 className="text-2xl font-extrabold text-slate-900 group-hover:text-orange-600 transition-colors leading-snug">
-                        {recipe.title}
-                      </h2>
-                      <div className="flex items-center text-slate-400 gap-1">
-                        <Eye size={14} />
-                        <span className="text-xs font-medium">
-                          {recipe.viewsCount.toLocaleString()}
-                        </span>
-                      </div>
+                {/* Content */}
+                <div className="p-5 flex flex-col flex-grow">
+                  {/* Metadata Row */}
+                  <div className="flex items-center justify-between mb-3 text-slate-400">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400">
+                      {category}
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <Eye size={14} />
+                      <span className="text-xs font-medium">
+                        {recipe.viewsCount.toLocaleString()}
+                      </span>
                     </div>
-                  </Link>
+                  </div>
 
+                  {/* Title */}
                   <Link
                     href={`/recipes/${category}/${recipe.slug}`}
-                    className="mt-4 inline-flex items-center text-sm font-bold text-slate-900 group/btn"
+                    className="mb-4"
                   >
-                    View Recipe
-                    <ChevronRight
-                      size={16}
-                      className="ml-1 transition-transform group-hover/btn:translate-x-1 text-orange-600"
-                    />
+                    <h2 className="text-xl font-semibold text-slate-900 leading-snug line-clamp-2 transition-colors group-hover:text-emerald-700">
+                      {recipe.title}
+                    </h2>
                   </Link>
+
+                  {/* Footer Action */}
+                  <div className="mt-auto pt-4 border-t border-slate-50">
+                    <Link
+                      href={`/recipes/${category}/${recipe.slug}`}
+                      className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-stone-900 hover:bg-red-700 text-white text-xs font-bold uppercase tracking-widest transition-colors duration-300 group/btn"
+                    >
+                      View Recipe
+                      <ChevronRight
+                        size={14}
+                        className="transition-transform group-hover/btn:translate-x-0.5"
+                      />
+                    </Link>
+                  </div>
                 </div>
               </article>
             );
