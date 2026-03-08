@@ -221,7 +221,7 @@ export default async function CategoryRecipes({
                     href={`/recipes/${category}/${recipe.slug}`}
                     className="mb-4"
                   >
-                    <h2 className="text-xl font-semibold text-slate-900 leading-snug line-clamp-2 transition-colors group-hover:text-emerald-700">
+                    <h2 className="text-2xl text-center font-semibold text-slate-900 leading-snug line-clamp-2 transition-colors group-hover:text-red-700">
                       {recipe.title}
                     </h2>
                   </Link>
@@ -230,7 +230,7 @@ export default async function CategoryRecipes({
                   <div className="mt-auto pt-4 border-t border-slate-50">
                     <Link
                       href={`/recipes/${category}/${recipe.slug}`}
-                      className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-stone-900 hover:bg-red-700 text-white text-xs font-bold uppercase tracking-widest transition-colors duration-300 group/btn"
+                      className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-red-800 hover:bg-red-600 text-white text-xs font-bold uppercase tracking-widest transition-colors duration-300 group/btn"
                     >
                       View Recipe
                       <ChevronRight

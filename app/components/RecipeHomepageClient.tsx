@@ -291,7 +291,7 @@ export default function RecipeHomepageClient({
           </h2>
         </div>
 
-        <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory -mx-4 px-4">
+        <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory mx-4 px-4">
           {featuredRecipes.map((recipe, idx) => (
             <motion.div
               key={recipe.id}
@@ -302,9 +302,9 @@ export default function RecipeHomepageClient({
               className="flex-none w-[78%] sm:w-[46%] md:w-[31%] lg:w-[24%] snap-start group"
             >
               <Link href={`/recipes/${recipe.categorySlug}/${recipe.slug}`}>
-                <div className="rounded-2xl overflow-hidden bg-white border border-stone-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div className="rounded-2xl overflow-hidden bg-white border border-stone-100 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200">
                   {/* Image */}
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[18/12] overflow-hidden">
                     {recipe.imageUrl ? (
                       <Image
                         src={recipe.imageUrl}
@@ -386,45 +386,43 @@ export default function RecipeHomepageClient({
           </div>
 
           {/* Replace the grid div with this */}
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
-            {trendingCategories.map((category, idx) => (
+          <div className="flex gap-6 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory px-4 sm:px-0">
+            {trendingCategories.map((category) => (
               <motion.div
                 key={category.slug}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                whileHover={{ y: -4 }}
-                className="flex-none w-[45%] sm:w-[30%] md:w-[22%] lg:w-[16%] snap-start"
+                whileHover={{ y: -8 }}
+                className="flex-none w-[70%] sm:w-[40%] md:w-[25%] lg:w-[18%] snap-start"
               >
                 <Link
                   href={`/recipes/${category.slug}`}
-                  className="block rounded-2xl border border-stone-200/50 hover:shadow-xl transition-all text-center group overflow-hidden"
+                  className="group block bg-white rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-2xl transition-all duration-500 overflow-hidden"
                 >
-                  <div className="relative w-full aspect-[4/3] overflow-hidden">
+                  {/* Image Section */}
+                  <div className="relative w-full aspect-[22/20] overflow-hidden bg-slate-100">
                     {category.imageUrl ? (
                       <Image
                         src={category.imageUrl}
                         alt={category.name}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     ) : (
                       <div
                         className={`w-full h-full bg-gradient-to-br ${category.color} flex items-center justify-center`}
                       >
-                        <span className="text-5xl">{category.icon}</span>
+                        <span className="text-4xl">{category.icon}</span>
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 text-left">
-                      <h3 className="font-bold text-white text-sm">
-                        {category.name}
-                      </h3>
-                      <p className="text-xs text-white/80">
-                        {category.count} recipes
-                      </p>
-                    </div>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="p-5">
+                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-red-700 transition-colors">
+                      {category.name}
+                    </h3>
+                    <p className="text-sm text-slate-500 mt-1 font-medium">
+                      {category.count.toLocaleString()} recipes
+                    </p>
                   </div>
                 </Link>
               </motion.div>

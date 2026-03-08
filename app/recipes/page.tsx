@@ -108,7 +108,7 @@ export default async function RecipeCategories() {
             <Link
               key={cat.id}
               href={`/recipes/${cat.slug}`}
-              className="group relative block aspect-square overflow-hidden rounded-4xl shadow-2xl"
+              className="group relative block aspect-26/30 overflow-hidden rounded-2xl shadow-2xl"
             >
               {cat.imageUrl ? (
                 <Image

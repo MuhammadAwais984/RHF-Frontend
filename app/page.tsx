@@ -67,7 +67,7 @@ async function getFeaturedRecipes(): Promise<FeaturedRecipe[]> {
 
   try {
     const res = await fetch(
-      `${API}/api/recipes?populate=*&sort[0]=viewsCount:desc&pagination[limit]=9`, // ← 6 to 9
+      `${API}/api/recipes?populate=*&sort[0]=viewsCount:desc&pagination[limit]=15`, // ← 6 to 9
       { cache: "no-store" },
     );
 
@@ -161,7 +161,7 @@ export default async function HomePage() {
 
   const trendingCategories = categories
     .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1)) // newest first
-    .slice(0, 9)
+    .slice(0, 12)
     .map((cat) => ({
       name: cat.name,
       slug: cat.slug,
