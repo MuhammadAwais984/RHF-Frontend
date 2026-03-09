@@ -66,8 +66,13 @@ async function getFeaturedRecipes(): Promise<FeaturedRecipe[]> {
   const API = process.env.NEXT_PUBLIC_STRAPI_URL;
 
   try {
+    // const res = await fetch(
+    //   `${API}/api/recipes?populate=*&sort[0]=viewsCount:desc&pagination[limit]=15`, // ← 6 to 9
+    //   { cache: "no-store" },
+    // );
+    // In page.tsx - getFeaturedRecipes()
     const res = await fetch(
-      `${API}/api/recipes?populate=*&sort[0]=viewsCount:desc&pagination[limit]=15`, // ← 6 to 9
+      `${API}/api/recipes?populate=*&sort[0]=createdAt:desc&pagination[limit]=15`,
       { cache: "no-store" },
     );
 
