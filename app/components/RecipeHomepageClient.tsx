@@ -280,34 +280,36 @@ export default function RecipeHomepageClient({
       </div>
 
       {/* FEATURED RECIPES SECTION */}
-      {/* FEATURED RECIPES SECTION */}
-      <section className="py-16 md:py-24 px-2 sm:px-4 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-600">
-            Handpicked for You
-          </span>
-          <h2 className="text-4xl md:text-5xl font-serif italic text-stone-900 mt-2">
-            Featured Recipes
-          </h2>
-        </div>
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-600">
+              Handpicked for You
+            </span>
+            <h2 className="text-4xl md:text-5xl  text-stone-900 mt-2">
+              Featured Recipes
+            </h2>
+          </div>
 
-        <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory mx-4 px-4">
-          {featuredRecipes.map((recipe, idx) => (
-            <motion.div
-              key={recipe.id}
-              whileHover={{ y: -2 }}
-              className="flex-none w-[78%] sm:w-[46%] md:w-[31%] lg:w-[24%] snap-start group"
-            >
-              <Link href={`/recipes/${recipe.categorySlug}/${recipe.slug}`}>
-                <div className="rounded-2xl overflow-hidden bg-white border border-stone-100 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200">
-                  {/* Image */}
-                  <div className="relative aspect-[18/12] overflow-hidden">
+          <div className="flex gap-6 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory px-4 sm:px-0">
+            {featuredRecipes.map((recipe, idx) => (
+              <motion.div
+                key={recipe.id}
+                whileHover={{ y: -8 }}
+                className="flex-none w-[70%] sm:w-[46%] md:w-[31%] lg:w-[24%] snap-start"
+              >
+                <Link
+                  href={`/recipes/${recipe.categorySlug}/${recipe.slug}`}
+                  className="group block bg-white rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-2xl transition-all duration-500 overflow-hidden"
+                >
+                  {/* Image Section */}
+                  <div className="relative w-full aspect-[18/12] overflow-hidden bg-slate-100 group">
                     {recipe.imageUrl ? (
                       <Image
                         src={recipe.imageUrl}
                         alt={recipe.title}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     ) : (
                       <div className="w-full h-full bg-stone-200 flex items-center justify-center">
@@ -315,58 +317,48 @@ export default function RecipeHomepageClient({
                       </div>
                     )}
 
-                    {/* Gradient overlay - always visible, stronger on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-
-                    {/* Favorite button - top right */}
-                    <button
-                      onClick={(e) => e.preventDefault()}
-                      className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-white hover:scale-110 transition-all duration-200"
-                    >
-                      <Heart className="w-3.5 h-3.5 text-red-600" />
-                    </button>
-
-                    {/* Time badge - bottom left, always visible */}
-                    <div className="absolute bottom-3 left-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
-                      <Clock className="w-3 h-3" />
+                    {/* Time Badge - Positioned Top Left */}
+                    <div className="absolute bottom-2 right-3 z-10 flex items-center gap-1.5 bg-white/90 backdrop-blur-md text-stone-800 text-[10px] tracking-wider px-2.5 py-1.5 rounded-xl shadow-sm">
+                      <Clock className="w-3 h-3 text-red-500" />
                       {recipe.totalTime} min
                     </div>
 
-                    {/* Servings - bottom right */}
-                    <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
-                      <Users className="w-3 h-3" />
-                      {recipe.servings}
-                    </div>
+                    {/* Gradient overlay - Improved for better text contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+
+                    {/* Optional: Add a subtle inner border on hover */}
+                    <div className="absolute inset-0 border-[6px] border-white/0 group-hover:border-white/10 transition-all duration-500" />
                   </div>
 
-                  {/* Text content */}
-                  <div className="p-4">
-                    {/* Category pill - top left */}
-                    <div className="">
-                      <span className="text-[10px] font-black uppercase tracking-widest backdrop-blur-sm text-red-600 py-1 rounded-full">
+                  {/* Content Section - mirrors categories card */}
+                  <div className="p-5">
+                    <div className="flex flex-col items-center">
+                      {/* Category label */}
+                      <span className="text-[10px] font-black uppercase tracking-widest text-red-600">
                         {recipe.categoryName}
                       </span>
+
+                      {/* Title */}
+                      <h3 className="text-2xl font-bold text-slate-900 group-hover:text-red-700 transition-colors mt-1 line-clamp-2 leading-snug">
+                        {recipe.title}
+                      </h3>
                     </div>
-                    <h3 className="text-lg font-bold text-stone-900 mt-2 group-hover:text-red-700 transition-colors line-clamp-2 leading-snug">
-                      {recipe.title}
-                    </h3>
-                    <div className="mt-auto pt-4 border-t border-slate-50">
-                      <Link
-                        href={`/recipes/${recipe.categorySlug}/${recipe.slug}`}
-                        className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-stone-900 hover:bg-red-700 text-white text-xs font-bold uppercase tracking-widest transition-colors duration-300 group/btn"
-                      >
+
+                    {/* CTA Button */}
+                    <div className="mt-2 border-t border-slate-100">
+                      <div className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-stone-900 group-hover:bg-red-700 text-white text-xs font-bold uppercase tracking-widest transition-colors duration-300">
                         View Recipe
                         <ChevronRight
                           size={14}
-                          className="transition-transform group-hover/btn:translate-x-0.5"
+                          className="transition-transform group-hover:translate-x-0.5"
                         />
-                      </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -377,7 +369,7 @@ export default function RecipeHomepageClient({
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-600">
               Explore by Category
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif italic text-stone-900 mt-2">
+            <h2 className="text-4xl md:text-5xl text-stone-900 mt-2">
               Trending Categories
             </h2>
           </div>
@@ -392,7 +384,7 @@ export default function RecipeHomepageClient({
               >
                 <Link
                   href={`/recipes/${category.slug}`}
-                  className="group block bg-white rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-2xl transition-all duration-500 overflow-hidden"
+                  className="group block bg-white rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-2xl transition-all duration-500 overflow-hidden"
                 >
                   {/* Image Section */}
                   <div className="relative w-full aspect-[22/20] overflow-hidden bg-slate-100">
@@ -413,11 +405,11 @@ export default function RecipeHomepageClient({
                   </div>
 
                   {/* Content Section */}
-                  <div className="p-5">
-                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-red-700 transition-colors">
+                  <div className="p-5 flex flex-col items-center">
+                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">
                       {category.name}
                     </h3>
-                    <p className="text-sm text-slate-500 mt-1 font-medium">
+                    <p className="text-sm text-slate-400 mt-1 font-medium">
                       {category.count.toLocaleString()} recipes
                     </p>
                   </div>
@@ -435,7 +427,7 @@ export default function RecipeHomepageClient({
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-600">
               Simple Process
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif italic text-stone-900 mt-2">
+            <h2 className="text-4xl md:text-5xl text-stone-900 mt-2">
               How It Works
             </h2>
           </div>
@@ -537,7 +529,7 @@ export default function RecipeHomepageClient({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-serif italic mb-6">
+            <h2 className="text-4xl md:text-5xl mb-6">
               Ready to Start Cooking?
             </h2>
             <p className="text-xl mb-10 text-red-100">
