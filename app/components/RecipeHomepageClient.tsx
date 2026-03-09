@@ -281,7 +281,7 @@ export default function RecipeHomepageClient({
 
       {/* FEATURED RECIPES SECTION */}
       {/* FEATURED RECIPES SECTION */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="py-16 md:py-24 px-2 sm:px-4 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-600">
             Handpicked for You
@@ -295,10 +295,7 @@ export default function RecipeHomepageClient({
           {featuredRecipes.map((recipe, idx) => (
             <motion.div
               key={recipe.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
+              whileHover={{ y: -2 }}
               className="flex-none w-[78%] sm:w-[46%] md:w-[31%] lg:w-[24%] snap-start group"
             >
               <Link href={`/recipes/${recipe.categorySlug}/${recipe.slug}`}>
