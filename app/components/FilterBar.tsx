@@ -188,7 +188,7 @@ export default function FilterBar({
             >
               <SlidersHorizontal
                 size={15}
-                className="text-amber-400 group-hover:rotate-90 transition-transform duration-300"
+                className="text-red-400 group-hover:rotate-90 transition-transform duration-300"
               />
               Filters
               {activeCount > 0 && (
@@ -204,7 +204,7 @@ export default function FilterBar({
                 <ActivePill
                   key={slug}
                   label={occasions.find((o) => o.slug === slug)?.name || slug}
-                  color="amber"
+                  color="red"
                   onClear={() => toggleArrayFilter("occasions", slug)}
                 />
               ))}
@@ -251,7 +251,7 @@ export default function FilterBar({
             }}
           >
             {/* Decorative top bar */}
-            <div className="h-1 w-full bg-gradient-to-r from-amber-400 via-rose-500 to-stone-800" />
+            <div className="h-1 w-full bg-gradient-to-r from-red-400 via-rose-500 to-stone-800" />
 
             {/* Header */}
             <div className="px-6 pt-6 pb-5 flex items-start justify-between border-b border-slate-100">
@@ -301,15 +301,15 @@ export default function FilterBar({
                           className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                             isActive
                               ? "bg-white/10"
-                              : "bg-slate-100 group-hover:bg-amber-50"
+                              : "bg-slate-100 group-hover:bg-red-50"
                           }`}
                         >
                           <Icon
                             size={16}
                             className={
                               isActive
-                                ? "text-amber-400"
-                                : "text-slate-500 group-hover:text-amber-500"
+                                ? "text-red-400"
+                                : "text-slate-500 group-hover:text-red-600"
                             }
                           />
                         </div>
@@ -326,7 +326,7 @@ export default function FilterBar({
                           </p>
                         </div>
                         {isActive && (
-                          <div className="w-5 h-5 rounded-full bg-amber-400 flex items-center justify-center shrink-0">
+                          <div className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center shrink-0">
                             <Check
                               size={11}
                               className="text-stone-900"
@@ -348,7 +348,7 @@ export default function FilterBar({
                 <div className="flex items-center justify-between">
                   <SectionLabel icon={Calendar} label="Occasion" />
                   {filters.occasions.length > 0 && (
-                    <span className="text-[11px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">
+                    <span className="text-[11px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full">
                       {filters.occasions.length} selected
                     </span>
                   )}
@@ -361,7 +361,7 @@ export default function FilterBar({
                         label={occ.name}
                         active={filters.occasions.includes(occ.slug)}
                         onClick={() => toggleArrayFilter("occasions", occ.slug)}
-                        accentColor="amber"
+                        accentColor="red"
                       />
                     ))
                   ) : (
@@ -407,7 +407,7 @@ export default function FilterBar({
                 onClick={closeSidebar}
                 className="w-full py-4 bg-stone-900 text-white rounded-2xl font-bold text-sm tracking-wide hover:bg-stone-800 active:scale-[0.98] transition-all shadow-lg shadow-stone-900/10 flex items-center justify-center gap-2"
               >
-                <Sparkles size={15} className="text-amber-400" />
+                <Sparkles size={15} className="text-red-400" />
                 Show Results
               </button>
               {activeCount > 0 && (
@@ -451,14 +451,14 @@ function SidebarChip({
   label: string;
   active: boolean;
   onClick: () => void;
-  accentColor: "amber" | "rose";
+  accentColor: "red" | "rose";
 }) {
   const activeStyles = {
-    amber: "bg-amber-50 border-amber-300 text-amber-800 ring-1 ring-amber-200",
+    red: "bg-red-50 border-red-300 text-red-800 ring-1 ring-red-200",
     rose: "bg-rose-50 border-rose-300 text-rose-800 ring-1 ring-rose-200",
   };
   const checkStyles = {
-    amber: "text-amber-600",
+    red: "text-red-600",
     rose: "text-rose-600",
   };
 
@@ -489,11 +489,11 @@ function ActivePill({
   onClear,
 }: {
   label: string;
-  color: "amber" | "rose";
+  color: "red" | "rose";
   onClear: () => void;
 }) {
   const styles = {
-    amber: "bg-amber-50 text-amber-700 border-amber-200 hover:border-amber-300",
+    red: "bg-red-50 text-red-700 border-red-200 hover:border-red-300",
     rose: "bg-rose-50 text-rose-700 border-rose-200 hover:border-rose-300",
   };
   return (
