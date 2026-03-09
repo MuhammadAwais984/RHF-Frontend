@@ -339,7 +339,7 @@ export default function RecipeHomepageClient({
                       </span>
 
                       {/* Title */}
-                      <h3 className="text-2xl font-bold text-slate-900 group-hover:text-red-700 transition-colors mt-1 line-clamp-2 leading-snug">
+                      <h3 className="text-xl sm:text-md font-bold text-slate-900 group-hover:text-red-700 transition-colors mt-1 line-clamp-2 leading-snug">
                         {recipe.title}
                       </h3>
                     </div>
@@ -406,7 +406,7 @@ export default function RecipeHomepageClient({
 
                   {/* Content Section */}
                   <div className="p-5 flex flex-col items-center">
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">
+                    <h3 className="text-lg sm:text-md font-bold text-slate-900 group-hover:text-red-700 transition-colors">
                       {category.name}
                     </h3>
                     <p className="text-sm text-slate-400 mt-1 font-medium">
