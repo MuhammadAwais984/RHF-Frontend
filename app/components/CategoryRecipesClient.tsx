@@ -19,6 +19,8 @@ interface RecipeCard {
   images: { url: string; altText: string }[];
   categorySlug?: string;
   categoryName?: string;
+  metaDescription?: string;
+  subtitle?: string;
 }
 
 interface Props {
@@ -143,10 +145,17 @@ export default function CategoryRecipesClient({
                         <ShareButton
                           url={`/recipes/${recipe.categorySlug}/${recipe.slug}`}
                           title={recipe.title}
-                          description={`Check out this ${recipe.categoryName} recipe!`}
-                          image={headImage?.url}
+                          description={
+                            recipe.subtitle || recipe.metaDescription
+                          }
+                          image={
+                            recipe.images?.[0]?.url
+                              ? recipe.images[0].url.startsWith("http")
+                                ? recipe.images[0].url
+                                : `${process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"}${recipe.images[0].url}`
+                              : undefined
+                          }
                           variant="icon"
-                          size="md"
                         />
                       </div>
                     </div>

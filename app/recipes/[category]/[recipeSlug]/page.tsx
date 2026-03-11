@@ -273,26 +273,10 @@ export default async function RecipeDetailsPage({
       {/* HERO */}
       <section className="bg-[#fafaf9] pt-10 pb-10 antialiased px-4">
         <div className="max-w-4xl mx-auto flex flex-col px-6 md:px-0">
-          <h1 className="md:text-5xl text-4xl mb-2 text-stone-900 font-extrabold">
-            {recipe.title}
-          </h1>
-
-          {/* <ShareButton
-            url={`/recipes/${recipe.categorySlug}/${recipe.slug}`}
-            title={recipe.title}
-            description={recipe.subtitle || recipe.metaDescription}
-            image={recipe.images?.[0]?.url}
-            variant="icon"
-            size="lg"
-          /> */}
-          <div className="flex items-center justify-between">
-            {/* Heart Icon with a subtle glow */}
-            <span className="text-lg font-serif italic text-stone-700">
-              {recipe.favouritesCount.toLocaleString()}{" "}
-              <span className="text-stone-400 font-sans not-italic text-sm ml-1">
-                People Liked
-              </span>
-            </span>
+          <div className="flex flex-row justify-between items-center">
+            <h1 className="md:text-5xl text-4xl mb-2 text-stone-900 font-extrabold">
+              {recipe.title}
+            </h1>
             <ShareButton
               url={`/recipes/${recipe.categorySlug}/${recipe.slug}`}
               title={recipe.title}
@@ -304,8 +288,18 @@ export default async function RecipeDetailsPage({
                     : `${process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"}${recipe.images[0].url}`
                   : undefined
               }
-              variant="button"
+              variant="icon"
             />
+          </div>
+
+          <div className="flex items-center justify-between">
+            {/* Heart Icon with a subtle glow */}
+            <span className="text-lg font-serif italic text-stone-700">
+              {recipe.favouritesCount.toLocaleString()}{" "}
+              <span className="text-stone-400 font-sans not-italic text-sm ml-1">
+                People Liked
+              </span>
+            </span>
           </div>
 
           <div className="flex flex-col gap-6 mb-12">

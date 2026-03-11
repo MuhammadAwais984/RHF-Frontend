@@ -39,8 +39,17 @@ export default function ShareButton({
   const [copied, setCopied] = useState(false);
   const [showNativeShare, setShowNativeShare] = useState(false);
 
+  // Create absolute URLs
   const shareUrl =
     typeof window !== "undefined" ? window.location.origin + url : url;
+
+  // Ensure image is absolute URL
+  const absoluteImageUrl =
+    image && typeof window !== "undefined"
+      ? image.startsWith("http")
+        ? image
+        : window.location.origin + image
+      : image;
 
   // Check if native share is available
   const hasNativeShare = typeof navigator !== "undefined" && navigator.share;
@@ -85,7 +94,7 @@ export default function ShareButton({
       name: "Pinterest",
       icon: Camera,
       color: "bg-red-600 hover:bg-red-700",
-      url: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&description=${encodeURIComponent(title)}&media=${encodeURIComponent(image)}`,
+      url: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&description=${encodeURIComponent(title)}&media=${encodeURIComponent(absoluteImageUrl || "")}`,
       available: true,
     },
     {
@@ -134,10 +143,10 @@ export default function ShareButton({
   };
 
   const handleDownloadImage = async () => {
-    if (!image) return;
+    if (!absoluteImageUrl) return;
 
     try {
-      const response = await fetch(image);
+      const response = await fetch(absoluteImageUrl);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -165,7 +174,7 @@ export default function ShareButton({
         return (
           <button
             onClick={handleNativeShare}
-            className="flex items-center gap-2 px-4 py-2 bg-stone-900 text-white rounded-full hover:bg-stone-800 transition-all shadow-lg hover:shadow-xl"
+            className="flex items-center gap-2 px-4 py-2 bg-red-700 text-white rounded-full hover:bg-red-800 transition-all shadow-lg hover:shadow-xl"
           >
             <Share2 className="w-4 h-4" />
             <span className="font-medium">Share Recipe</span>
@@ -187,7 +196,7 @@ export default function ShareButton({
         return (
           <button
             onClick={handleNativeShare}
-            className={`${sizeClasses[size]} bg-white border-2 border-stone-200 rounded-full flex items-center justify-center hover:border-orange-500 hover:text-orange-600 transition-all shadow-sm hover:shadow-md`}
+            className={`${sizeClasses[size]} bg-white border-2 border-stone-200 rounded-full flex items-center justify-center hover:border-red-500 hover:text-red-600 transition-all shadow-sm hover:shadow-md`}
           >
             <Share2 className="w-4 h-4" />
           </button>
@@ -225,7 +234,7 @@ export default function ShareButton({
                   <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
                     <Share2 className="w-5 h-5 text-orange-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-stone-900">
+                  <h3 className="text-xl font-bold text-red-700">
                     Share Recipe
                   </h3>
                 </div>
@@ -295,7 +304,7 @@ export default function ShareButton({
                       Download the image and upload to your Instagram Story or
                       Feed
                     </p>
-                    {image && (
+                    {absoluteImageUrl && (
                       <button
                         onClick={handleDownloadImage}
                         className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg text-xs font-semibold hover:from-purple-700 hover:to-pink-700 transition-all"
