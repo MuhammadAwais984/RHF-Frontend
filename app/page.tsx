@@ -166,7 +166,7 @@ export default async function HomePage() {
 
   const trendingCategories = categories
     .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1)) // newest first
-    .slice(0, 12)
+    .slice(0, 15)
     .map((cat) => ({
       name: cat.name,
       slug: cat.slug,

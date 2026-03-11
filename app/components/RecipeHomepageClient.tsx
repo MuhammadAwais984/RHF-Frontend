@@ -53,6 +53,22 @@ interface Props {
   trendingCategories: TrendingCategory[];
   stats: PlatformStats;
 }
+function formatTime(minutes: number): string {
+  if (!minutes || minutes === 0) return "0m";
+
+  if (minutes < 60) {
+    return `${minutes}m`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  if (remainingMinutes === 0) {
+    return `${hours}h`;
+  }
+
+  return `${hours}h ${remainingMinutes}m`;
+}
 
 export default function RecipeHomepageClient({
   featuredRecipes,
@@ -320,7 +336,7 @@ export default function RecipeHomepageClient({
                     {/* Time Badge - Positioned Top Left */}
                     <div className="absolute bottom-2 right-3 z-10 flex items-center gap-1.5 bg-white/90 backdrop-blur-md text-stone-800 text-[10px] tracking-wider px-2.5 py-1.5 rounded-xl shadow-sm">
                       <Clock className="w-3 h-3 text-red-500" />
-                      {recipe.totalTime} min
+                      {formatTime(recipe.totalTime)}
                     </div>
 
                     {/* Gradient overlay - Improved for better text contrast */}

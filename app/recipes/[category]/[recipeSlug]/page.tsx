@@ -58,6 +58,22 @@ export async function generateMetadata({
     },
   };
 }
+function formatTime(minutes: number): string {
+  if (!minutes || minutes === 0) return "0m";
+
+  if (minutes < 60) {
+    return `${minutes}m`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  if (remainingMinutes === 0) {
+    return `${hours}h`;
+  }
+
+  return `${hours}h ${remainingMinutes}m`;
+}
 
 async function getRecipe(slug: string) {
   if (!slug) throw new Error("Missing recipe slug");
@@ -442,14 +458,15 @@ export default async function RecipeDetailsPage({
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 md:gap-y-0 divide-x-0 md:divide-x divide-stone-100">
               <StatItem
-                icon={<ClockIcon className="w-5 h-5 text-red-700" />}
-                label="Prep Time"
-                value={`${recipe.preptime}m`}
-              />
-              <StatItem
                 icon={<FlameIcon className="w-5 h-5 text-red-700" />}
                 label="Cook Time"
-                value={`${recipe.cookTime}m`}
+                value={formatTime(recipe.cookTime)}
+              />
+
+              <StatItem
+                icon={<ClockIcon className="w-5 h-5 text-red-700" />}
+                label="Prep Time"
+                value={formatTime(recipe.preptime)}
               />
               <StatItem
                 icon={<UsersIcon className="w-5 h-5 text-red-700" />}
