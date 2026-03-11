@@ -9,6 +9,7 @@ import MarkdownRenderer from "@/app/components/MarkdownRenderer";
 import RecipeQA from "@/app/components/RecipeQA";
 import IncrementView from "@/app/components/IncrementView";
 import FavoriteButton from "@/app/components/FavoriteButton";
+import ShareButton from "@/app/components/ShareButton";
 
 export async function generateMetadata({
   params,
@@ -275,6 +276,15 @@ export default async function RecipeDetailsPage({
           <h1 className="md:text-5xl text-4xl mb-2 text-stone-900 font-extrabold">
             {recipe.title}
           </h1>
+
+          {/* <ShareButton
+            url={`/recipes/${recipe.categorySlug}/${recipe.slug}`}
+            title={recipe.title}
+            description={recipe.subtitle || recipe.metaDescription}
+            image={recipe.images?.[0]?.url}
+            variant="icon"
+            size="lg"
+          /> */}
           <div className="flex items-center justify-between">
             {/* Heart Icon with a subtle glow */}
             <span className="text-lg font-serif italic text-stone-700">
@@ -283,6 +293,19 @@ export default async function RecipeDetailsPage({
                 People Liked
               </span>
             </span>
+            <ShareButton
+              url={`/recipes/${recipe.categorySlug}/${recipe.slug}`}
+              title={recipe.title}
+              description={recipe.subtitle || recipe.metaDescription}
+              image={
+                recipe.images?.[0]?.url
+                  ? recipe.images[0].url.startsWith("http")
+                    ? recipe.images[0].url
+                    : `${process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"}${recipe.images[0].url}`
+                  : undefined
+              }
+              variant="button"
+            />
           </div>
 
           <div className="flex flex-col gap-6 mb-12">

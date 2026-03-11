@@ -6,6 +6,7 @@ import { useState, useCallback } from "react";
 import FavoriteButton from "@/app/components/FavoriteButton";
 import { ChevronRight, Eye, Loader2 } from "lucide-react";
 import FilterBar from "./FilterBar";
+import ShareButton from "./ShareButton";
 
 interface RecipeCard {
   id: number;
@@ -135,6 +136,17 @@ export default function CategoryRecipesClient({
                         <FavoriteButton
                           recipeId={recipe.id}
                           initialCount={recipe.favoritesCount}
+                        />
+                      </div>
+                      <div className="absolute top-3 left-3 z-10 ">
+                        {/* SHARE BUTTON - Icon variant */}
+                        <ShareButton
+                          url={`/recipes/${recipe.categorySlug}/${recipe.slug}`}
+                          title={recipe.title}
+                          description={`Check out this ${recipe.categoryName} recipe!`}
+                          image={headImage?.url}
+                          variant="icon"
+                          size="md"
                         />
                       </div>
                     </div>
