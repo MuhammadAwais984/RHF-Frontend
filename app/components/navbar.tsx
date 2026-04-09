@@ -48,12 +48,12 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-[60] transition-all duration-500 ${
+      className={`fixed top-0 left-0 w-full z-60 transition-all duration-500 ${
         // 2. Force solid white when open or scrolled
         open || scrolled ? "bg-white shadow-md py-3" : "bg-white py-5"
       }`}
     >
-      <div className="mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* LOGO AREA */}
         <Link
           href="/"
@@ -118,12 +118,12 @@ export default function Navbar() {
             {open ? <FaTimes size={20} /> : <FaBars size={20} />}
           </button>
 
-          <Link
+          {/* <Link
             href="/recipes"
             className="hidden lg:block bg-red-700 text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:bg-red-800 transition-all active:scale-95"
           >
             Explore
-          </Link>
+          </Link> */}
         </div>
       </div>
 

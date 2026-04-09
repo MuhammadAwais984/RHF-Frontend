@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { StatsSection } from "./StatsHome";
 
 interface FeaturedRecipe {
   id: number;
@@ -494,7 +495,7 @@ export default function RecipeHomepageClient({
       </section>
 
       {/* STATS SECTION */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-stone-50">
+      {/* <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-stone-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
@@ -535,7 +536,8 @@ export default function RecipeHomepageClient({
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+      <StatsSection stats={stats} />
 
       {/* CTA SECTION */}
       <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-red-900 text-white">

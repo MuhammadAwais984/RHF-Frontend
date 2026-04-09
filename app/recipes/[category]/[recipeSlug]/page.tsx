@@ -10,6 +10,7 @@ import RecipeQA from "@/app/components/RecipeQA";
 import IncrementView from "@/app/components/IncrementView";
 import FavoriteButton from "@/app/components/FavoriteButton";
 import ShareButton from "@/app/components/ShareButton";
+import { RecipeStats } from "@/app/components/RecipeStats";
 
 export async function generateMetadata({
   params,
@@ -450,58 +451,14 @@ export default async function RecipeDetailsPage({
           </div>
         </div>
         {/* Footer Divider */}
-
         {/* 5. PIC (FULL WIDTH BELOW) */}
         <div className="py-12 bg-stone-50">
-          <div className="max-w-[800px] mx-auto px-4">
+          <div className="max-w-4xl mx-auto px-4">
             <RecipeImageCarousel images={headImages} title={recipe.title} />
-
-            {/* Elegant Editorial Caption */}
-            {recipe.caption && (
-              <div className="mt-8 text-center">
-                <span className="inline-block w-8 h-px bg-red-700/40 mb-4" />
-                <p className="text-stone-500 font-serif italic text-lg leading-relaxed">
-                  &ldquo;{recipe.caption}&rdquo;
-                </p>
-              </div>
-            )}
           </div>
         </div>
-        {/* ADDITIONAL STATS SECTION */}
-        <div className="max-w-4xl mx-auto px-6 mt-20">
-          <div className="relative group bg-white rounded-3xl border border-stone-100 p-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04)] hover:shadow-xl hover:shadow-stone-200/40 transition-all duration-500">
-            {/* Subtle Decorative Background Element */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-red-700 rounded-b-full opacity-20 group-hover:w-48 transition-all duration-500" />
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 md:gap-y-0 divide-x-0 md:divide-x divide-stone-100">
-              <StatItem
-                icon={<FlameIcon className="w-5 h-5 text-red-700" />}
-                label="Cook Time"
-                value={formatTime(recipe.cookTime)}
-              />
-
-              <StatItem
-                icon={<ClockIcon className="w-5 h-5 text-red-700" />}
-                label="Prep Time"
-                value={formatTime(recipe.preptime)}
-              />
-              <StatItem
-                icon={<UsersIcon className="w-5 h-5 text-red-700" />}
-                label="Servings"
-                value={recipe.servings}
-              />
-              <StatItem
-                icon={<ActivityIcon className="w-5 h-5 text-red-700" />}
-                label="Calories"
-                value={
-                  recipe.nutrition?.calories
-                    ? `${recipe.nutrition.calories} kcal`
-                    : "—"
-                }
-              />
-            </div>
-          </div>
-        </div>
+        {/* ----------------------------------------------------------------------- */}
+        <RecipeStats recipe={recipe} />{" "}
       </section>
       {/* CONTENT */}
       <section className="w-full max-w-4xl mx-auto px-6 py-10">
