@@ -41,12 +41,6 @@ function StatItem({
 export function RecipeStats({ recipe }: { recipe: any }) {
   const allStats = [
     {
-      key: "cookTime",
-      icon: <FlameIcon className="w-5 h-5 text-red-700" />,
-      label: "Cook Time",
-      value: formatTime(recipe.cookTime),
-    },
-    {
       key: "prepTime",
       icon: <ClockIcon className="w-5 h-5 text-red-700" />,
       label: "Prep Time",
@@ -63,6 +57,12 @@ export function RecipeStats({ recipe }: { recipe: any }) {
       icon: <TimerIcon className="w-5 h-5 text-red-700" />,
       label: "Marinate Time",
       value: formatTime(recipe.marinateTime),
+    },
+    {
+      key: "cookTime",
+      icon: <FlameIcon className="w-5 h-5 text-red-700" />,
+      label: "Cook Time",
+      value: formatTime(recipe.cookTime),
     },
     {
       key: "servings",

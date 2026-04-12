@@ -18,13 +18,22 @@ export default function RecipeQA({
   if (!qa || qa.length === 0) return null;
 
   return (
-    <section className="max-w-3xl mx-auto mt-12 md:mt-20 px-4">
+    <section className="max-w-4xl mx-auto mt-12 md:mt-20 px-4">
       {/* Header: Adjusted for mobile wrapping */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8 border-b border-stone-100 pb-6">
-        <h2 className="text-3xl md:text-4xl text-stone-900">People also ask</h2>
-        <span className="inline-block self-start text-[10px] font-bold uppercase tracking-widest text-red-700 bg-red-50 px-3 py-1 rounded-full whitespace-nowrap">
-          {qa.length} Common Questions
-        </span>
+      <div className="border-b border-stone-100 flex flex-row items-center justify-between gap-3 mb-10">
+        <div>
+          <h2 className="text-4xl font-semibold text-stone-900 tracking-tight">
+            People Also Ask
+          </h2>
+        </div>
+        <div className="h-px flex-1 bg-stone-200" />
+
+        {/* Servings pill — optional, remove if not needed */}
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <span className="shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-stone-500 bg-stone-50 border border-stone-200 px-4 py-2 rounded-full shadow-sm">
+            {qa.length} Common Questions
+          </span>
+        </div>
       </div>
 
       <div className="space-y-3">

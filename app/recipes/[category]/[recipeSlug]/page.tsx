@@ -11,6 +11,9 @@ import IncrementView from "@/app/components/IncrementView";
 import FavoriteButton from "@/app/components/FavoriteButton";
 import ShareButton from "@/app/components/ShareButton";
 import { RecipeStats } from "@/app/components/RecipeStats";
+import RecipeMethod from "@/app/components/RecipeSteps";
+import ChefNote from "@/app/components/RecipeChefsNote";
+import Ingredients from "@/app/components/RecipeIngredients";
 
 export async function generateMetadata({
   params,
@@ -458,221 +461,26 @@ export default async function RecipeDetailsPage({
           </div>
         </div>
         {/* ----------------------------------------------------------------------- */}
-        <RecipeStats recipe={recipe} />{" "}
+        <RecipeStats recipe={recipe} />
       </section>
-      {/* CONTENT */}
-      <section className="w-full max-w-4xl mx-auto px-6 py-10">
-        {/* INGREDIENTS CONTAINER */}
-        <div className="flex flex-col gap-8">
-          {/* MAIN INGREDIENTS CARD */}
-          <div className="bg-white rounded-[2rem] border border-stone-200 shadow-2xl shadow-stone-200/30 overflow-hidden">
-            {/* HEADER SECTION */}
-            <div className="px-8 py-7 border-b border-stone-100 bg-stone-50/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-3 mb-1">
-                  <div className="h-2 w-2 rounded-full bg-orange-500 animate-pulse" />
-                  <h2 className="text-2xl  text-stone-900">Ingredients</h2>
-                </div>
-                <p className="text-sm text-stone-500 font-medium ml-5">
-                  {recipe.ingredients.length} items to prepare this masterpiece
-                </p>
-              </div>
-            </div>
 
-            {/* INTERACTIVE LIST */}
-            <div className="px-4 py-6 md:px-8">
-              <ul className="grid grid-cols-1 divide-y divide-stone-50">
-                {recipe.ingredients.map((ing: any) => {
-                  const imageUrl = ing.recipeImages?.[0]?.url;
+      {/* INGREDIENTS */}
+      <section>
+        <Ingredients ingredients={recipe.ingredients} />
+      </section>
 
-                  return (
-                    <li
-                      key={ing.id}
-                      className="group flex items-center gap-4 py-4 px-2 transition-all duration-300"
-                    >
-                      {/* CHECKBOX CUSTOM COMPONENT */}
-                      {/* <div className="relative flex items-center justify-center shrink-0">
-                        <input
-                          type="checkbox"
-                          className="peer h-6 w-6 cursor-pointer appearance-none rounded-lg border-2 border-stone-200 transition-all checked:bg-stone-900 checked:border-stone-900 hover:border-orange-400"
-                        />
-                        <svg
-                          className="absolute w-4 h-4 text-white opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={3}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      </div> */}
+      {/* STEPS */}
+      <section className="w-full max-w-4xl mx-auto px-6 py-12">
+        <RecipeMethod steps={recipe.steps} />
+      </section>
 
-                      {/* INGREDIENT IMAGE */}
-                      {/* Change the Ingredient Image section to this: */}
-                      <div className="relative w-15 h-15 flex-shrink-0 rounded-xl overflow-hidden ring-2 ring-stone-50 group-hover:ring-orange-100 transition-all">
-                        {ing.imageUrl ? (
-                          <Image
-                            src={ing.imageUrl}
-                            alt={ing.altText}
-                            fill // Use fill for small thumbnails in a relative container
-                            className="object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-stone-100 flex items-center justify-center text-[10px]">
-                            No Pic
-                          </div>
-                        )}
-                      </div>
-
-                      {/* INFO */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-baseline justify-between gap-4">
-                          <span className="text-base font-semibold text-stone-800 truncate group-hover:text-stone-900 peer-checked:text-stone-400 peer-checked:line-through decoration-stone-400 transition-all">
-                            {ing.ingredientName}
-                          </span>
-                          <div className="flex-grow border-b border-dotted border-stone-200 mb-1 hidden sm:block" />
-                          <span className="text-sm font-black text-stone-500 tabular-nums shrink-0 bg-stone-50 px-2 py-0.5 rounded-md">
-                            {ing.quantity} {ing.unit}
-                          </span>
-                        </div>
-                        {ing.preparationNote && (
-                          <p className="text-[12px] text-stone-400 font-medium italic mt-0.5">
-                            {ing.preparationNote}
-                          </p>
-                        )}
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-        </div>
+      <section>
+        <ChefNote
+          chefNoteTitle={recipe.chefNoteTitle}
+          chefsNote={recipe.chefsNote}
+        />
       </section>
       <section className="w-full max-w-4xl mx-auto px-6 py-12">
-        {/* STEPS */}
-        <div className="lg:col-span-8">
-          <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl md:text-4xl text-stone-800">Method</h2>
-            <div className="h-px flex-1 bg-stone-200 mt-2"></div>
-          </div>
-
-          <div className="relative space-y-12">
-            {/* Subtle Timeline Line - Hidden on small mobile, visible from md up */}
-            <div className="absolute left-8 md:left-[31px] top-4 bottom-4 w-px bg-stone-100 hidden md:block" />
-
-            {recipe.steps.map((step: any, index: number) => (
-              <div
-                key={step.id}
-                /* 2. Changed md:grid-cols to handle the step number better on mobile */
-                className="relative group flex flex-col md:grid md:grid-cols-[64px_1fr] gap-6"
-              >
-                {/* STEP NUMBER */}
-                <div className="relative z-10">
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-red-700 via-red-800 to-indigo-900 flex flex-col items-center justify-center shadow-lg transition-transform group-hover:rotate-3">
-                    <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-red-100 font-bold leading-none mb-1">
-                      Step
-                    </span>
-                    <span className="text-xl md:text-2xl font-serif font-bold text-white leading-none">
-                      {index + 1}
-                    </span>
-                  </div>
-                </div>
-
-                {/* CONTENT CARD */}
-                <div className="bg-white rounded-3xl border border-stone-100 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-orange-100">
-                  {/* Find this line inside your steps.map */}
-                  <div
-                    className={` ${
-                      step.imageUrls.length > 0 ? "lg:grid-cols-2" : ""
-                    }`}
-                  >
-                    {/* INSTRUCTION SIDE */}
-                    <div className="p-6 md:p-8 flex flex-col justify-center">
-                      <div
-                        className="text-base md:text-lg leading-relaxed text-stone-600 prose prose-stone prose-orange max-w-none 
-                  prose-strong:text-stone-900 prose-p:m-0"
-                      />
-                      <MarkdownRenderer content={step.instruction} />
-                    </div>
-
-                    {/* IMAGE SIDE */}
-                    {/* IMAGE SIDE */}
-                    {step.imageUrls && step.imageUrls.length > 0 && (
-                      <div
-                        className={`p-4 bg-stone-50/50 ${
-                          step.imageUrls.length > 1
-                            ? "grid grid-cols-2 gap-3" // Grid for multiple images
-                            : "flex flex-col" // Single image layout
-                        }`}
-                      >
-                        {step.imageUrls.map((imageObj: any, i: number) => (
-                          <div
-                            key={imageObj.url}
-                            className="relative aspect-square md:aspect-[4/3] overflow-hidden shadow-sm border border-stone-200"
-                          >
-                            <Image
-                              src={imageObj.url}
-                              alt={imageObj.alt}
-                              fill
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                              className="object-cover"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="relative mt-16 group">
-          {/* The Decorative Sidebar Accent */}
-          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-stone-900 rounded-full transition-all duration-300 group-hover:bg-orange-600" />
-
-          <div className="pl-8 flex flex-col md:flex-row items-start gap-8">
-            {/* Minimalist Icon/Badge */}
-            <div className="relative shrink-0">
-              <div className="h-14 w-14 bg-stone-50 rounded-full flex items-center justify-center border border-stone-200 transition-all duration-500 group-hover:border-orange-200 group-hover:bg-orange-50">
-                <span className="text-2xl grayscale group-hover:grayscale-0 transition-all">
-                  👨‍🍳
-                </span>
-              </div>
-              {/* Decorative dot */}
-              <div className="absolute -top-1 -right-1 h-4 w-4 bg-orange-500 rounded-full border-4 border-white" />
-            </div>
-
-            <div className="max-w-3xl">
-              {/* Title: Serif or Bold Sans */}
-              <h4 className="text-2xl font-black text-stone-900 leading-tight mb-4 tracking-tight">
-                {recipe.chefNoteTitle}
-              </h4>
-
-              {/* Content: Clean spacing and serif-style quote feel */}
-              <div className="relative">
-                <div className="text-lg  leading-relaxed tracking-tight">
-                  <MarkdownRenderer content={recipe.chefsNote} />
-                </div>
-                {/* Subtle Signature/Decorative Line */}
-                <div className="mt-6 flex items-center gap-3">
-                  <div className="h-[1px] w-12 bg-stone-200" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="w-full max-w-4xl mx-auto px-6 py-12">
-        <div className="flex items-center gap-4 mb-10">
-          <h2 className="text-4xl text-stone-800">Nutritions</h2>
-          <div className="h-px flex-1 bg-stone-200 mt-2"></div>
-        </div>
         <NutritionSection recipe={recipe} hasNutrition={hasNutrition} />
       </section>
       {/* <section className="max-w-4xl mx-auto mt-10 px-6">

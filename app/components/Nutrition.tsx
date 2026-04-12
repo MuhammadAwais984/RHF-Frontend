@@ -51,7 +51,11 @@ export default function NutritionSection({ recipe, hasNutrition }: any) {
   const n = recipe.nutrition;
 
   return (
-    <section className="max-w-4xl mx-auto mt-12 px-4 font-sans">
+    <section className="max-w-4xl mx-auto mt-12 font-sans">
+      <div className="flex items-center gap-4 mb-10">
+        <h2 className="text-4xl font-semibold text-stone-800">Nutritions</h2>
+        <div className="h-px flex-1 bg-stone-200 mt-2"></div>
+      </div>
       <div className="bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-stone-100 overflow-hidden">
         {!n ? (
           <div className="py-12 flex flex-col items-center justify-center gap-3 text-stone-300">
