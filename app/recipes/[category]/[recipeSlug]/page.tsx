@@ -92,7 +92,9 @@ async function getRecipe(slug: string) {
 &populate[nutrition]=true
 &populate[ingredients][populate]=*
 &populate[steps][populate]=*
-&populate[questionAnswer][populate]=*`,
+&populate[questionAnswer][populate]=*
+&populate[recipeStats][populate]=*`,
+
     { cache: "no-store" },
   );
   if (!res.ok) throw new Error("Failed to load recipe");
@@ -161,6 +163,13 @@ async function getRecipe(slug: string) {
       })) || [],
     categorySlug: recipe.recipe_category?.slug,
     categoryName: recipe.recipe_category?.Name,
+    stats:
+      recipe.recipeStats?.map((stat: any) => ({
+        label: stat.label,
+        value: stat.value,
+        unit: null, // you don't have a unit field in Strapi
+        icon: stat.icon ?? null, // your Strapi field is "icon" not "iconName"
+      })) || [],
     reviews:
       recipe.reviews?.map((r: any) => ({
         id: r.id,

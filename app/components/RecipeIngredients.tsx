@@ -40,8 +40,8 @@ export default function Ingredients({ ingredients }: IngredientsProps) {
           </div>
           <div className="h-px flex-1 bg-stone-200" />
 
-          <div className="flex items-center gap-2 self-start sm:self-auto">
-            <span className="shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-stone-500 bg-stone-50 border border-stone-200 px-4 py-2 rounded-full shadow-sm">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-2">
+            <span className="shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-stone-500 bg-stone-50 border border-stone-200 px-4 py-2 rounded-full shadow-sm text-center">
               {ingredients.length} Total Ingredients
             </span>
           </div>

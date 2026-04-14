@@ -8,12 +8,27 @@ import {
   TimerIcon,
 } from "lucide-react";
 
-function formatTime(minutes?: number | null): string | null {
-  if (!minutes || minutes <= 0) return null;
-  if (minutes < 60) return `${minutes} min`;
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  return m > 0 ? `${h}h ${m}m` : `${h}h`;
+const iconMap: Record<string, React.ReactNode> = {
+  clock: <ClockIcon className="w-5 h-5 text-red-700" />,
+  flame: <FlameIcon className="w-5 h-5 text-red-700" />,
+  timer: <TimerIcon className="w-5 h-5 text-red-700" />,
+  users: <UsersIcon className="w-5 h-5 text-red-700" />,
+  activity: <ActivityIcon className="w-5 h-5 text-red-700" />,
+};
+// Add this function
+function formatValue(value: number, icon: string): string {
+  const timeIcons = ["clock", "flame", "timer"];
+
+  if (timeIcons.includes(icon?.toLowerCase())) {
+    // Format as time (minutes → h/m)
+    if (value < 60) return `${value} min`;
+    const h = Math.floor(value / 60);
+    const m = value % 60;
+    return m > 0 ? `${h}h ${m}m` : `${h}h`;
+  }
+
+  // Not a time field — just return the number as-is
+  return String(value);
 }
 
 function StatItem({
@@ -38,73 +53,44 @@ function StatItem({
   );
 }
 
-export function RecipeStats({ recipe }: { recipe: any }) {
-  const allStats = [
-    {
-      key: "prepTime",
-      icon: <ClockIcon className="w-5 h-5 text-red-700" />,
-      label: "Prep Time",
-      value: formatTime(recipe.preptime),
-    },
-    {
-      key: "soakTime",
-      icon: <TimerIcon className="w-5 h-5 text-red-700" />,
-      label: "Soak Time",
-      value: formatTime(recipe.soakTime),
-    },
-    {
-      key: "marinateTime",
-      icon: <TimerIcon className="w-5 h-5 text-red-700" />,
-      label: "Marinate Time",
-      value: formatTime(recipe.marinateTime),
-    },
-    {
-      key: "cookTime",
-      icon: <FlameIcon className="w-5 h-5 text-red-700" />,
-      label: "Cook Time",
-      value: formatTime(recipe.cookTime),
-    },
-    {
-      key: "servings",
-      icon: <UsersIcon className="w-5 h-5 text-red-700" />,
-      label: "Servings",
-      value: recipe.servings ? `${recipe.servings}` : null,
-    },
-  ];
+function getColClass(count: number): string {
+  if (count <= 2) return "grid-cols-2";
+  if (count === 3) return "grid-cols-1 md:grid-cols-3";
+  if (count === 4) return "grid-cols-2 md:grid-cols-4";
+  if (count === 5) return "grid-cols-1 md:grid-cols-5";
+  return "grid-cols-2 md:grid-cols-3 lg:grid-cols-6";
+}
 
-  // Only keep stats that have a real value
-  const visibleStats = allStats.filter((s) => s.value !== null);
+export function RecipeStats({ recipe }: { recipe: any }) {
+  const stats: { label: string; value: number; icon: string }[] =
+    recipe?.stats ?? [];
+
+  // Filter out any with no value
+  const visibleStats = stats.filter((s) => s.value && s.value > 0);
 
   if (visibleStats.length === 0) return null;
 
-  // Pick a sensible column count based on how many stats are visible
-  const colClass =
-    visibleStats.length <= 2
-      ? "grid-cols-2"
-      : visibleStats.length === 3
-        ? "grid-cols-3"
-        : visibleStats.length === 4
-          ? "grid-cols-2 md:grid-cols-4"
-          : visibleStats.length === 5
-            ? "grid-cols-2 md:grid-cols-5"
-            : "grid-cols-2 md:grid-cols-3 lg:grid-cols-6";
+  const colClass = getColClass(visibleStats.length);
 
   return (
     <div className="max-w-4xl mx-auto px-6">
       <div className="relative group bg-white rounded-3xl border border-stone-100 p-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04)] hover:shadow-xl hover:shadow-stone-200/40 transition-all duration-500">
-        {/* Accent bar */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-red-700 rounded-b-full opacity-20 group-hover:w-48 transition-all duration-500" />
 
         <div className={`grid ${colClass} gap-y-8`}>
           {visibleStats.map((stat, idx) => (
             <div
-              key={stat.key}
+              key={`${stat.label}-${idx}`}
               className={idx > 0 ? "border-l border-stone-100" : ""}
             >
               <StatItem
-                icon={stat.icon}
+                icon={
+                  iconMap[stat.icon?.toLowerCase()] ?? (
+                    <ActivityIcon className="w-5 h-5 text-red-700" />
+                  )
+                }
                 label={stat.label}
-                value={stat.value!}
+                value={formatValue(stat.value, stat.icon)} // ← replace String(stat.value)
               />
             </div>
           ))}
