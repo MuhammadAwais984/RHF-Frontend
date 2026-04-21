@@ -334,12 +334,6 @@ export default function RecipeHomepageClient({
                       </div>
                     )}
 
-                    {/* Time Badge - Positioned Top Left */}
-                    <div className="absolute bottom-2 right-3 z-10 flex items-center gap-1.5 bg-white/90 backdrop-blur-md text-stone-800 text-[10px] tracking-wider px-2.5 py-1.5 rounded-xl shadow-sm">
-                      <Clock className="w-3 h-3 text-red-500" />
-                      {formatTime(recipe.totalTime)}
-                    </div>
-
                     {/* Gradient overlay - Improved for better text contrast */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
